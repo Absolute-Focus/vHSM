@@ -8,14 +8,16 @@ RUN apk --update add \
         autoconf \
         automake \
         libtool \
-        openssl-dev
+        openssl-dev \
+        sqlite \
+        sqlite-dev 
 
 # build and install SoftHSM2
 COPY SoftHSMv2 /opt/SoftHSMv2
 WORKDIR ${SOFTHSM2_SOURCES}
 
 RUN sh autogen.sh \
-    && ./configure --prefix=/usr/local \
+    && ./configure --with-objectstore-backend-db --with-crypto-backend=openssl \
     && make \
     && make install
 
