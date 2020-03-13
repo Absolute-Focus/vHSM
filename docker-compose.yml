@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  v-hsm:
+    #image: vHSM:latest
+    build:
+        context: ./
+        dockerfile: Dockerfile
+    volumes:
+      # SoftHSM volumes
+      - ./softhsm2.conf:/etc/softhsm2.conf
+      - hsm-tokens:/var/lib/softhsm/tokens
+volumes:
+  hsm-tokens:
