@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+    title: initialize
+    version: 1.0.0
+paths:
+    /c_initialize:
+        post:
+            tags: [core]
+            summary: Initializes the Cryptoki library
+            description: >
+                Initializes the Cryptoki library
+            # binds a127 app logic to a route
+            x-swagger-router-controller: core
+            # used as the method name of the controller
+            operationId: c_initialize
+            requestBody:
+                description: Optional description in *Markdown*
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#model.initialize.oas3.yaml/components/schemas/"
+
+            responses:
+                "200":
+                    description: "Random bytes retrieved successfully"
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                                format: "byte"
+                                description: >
+                                    base64-encoded random bytes
+                                example: "U3dhZ2dlciByb2Nrcw=="
+                # Defining 400 due to OpenAPI3 bug with default not working
+                # See: https://github.com/isa-group/oas-tools/issues/87
+                "400":
+                    description: "Bad Request"
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "./errorModels.oas3.yaml#/components/schemas/Error"
+                # Defining 500 due to OpenAPI3 bug with default not working
+                # See: https://github.com/isa-group/oas-tools/issues/87
+                "500":
+                    description: "Internal Server Error"
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "./errorModels.oas3.yaml#/components/schemas/Error"
+                # responses may fall through to errors
+                default:
+                    description: "An error ocurred"
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "./errorModels.oas3.yaml#/components/schemas/Error"

@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  version: "0.0.1"
+  title: vHSM
+  description: >
+    A REST interface that wraps PKCS#11 functionality to an HSM or any PKCS#11
+    device.
+  contact:
+    name: Absolute Focus
+    email: jas.ahluwalia@gmail.com
+tags:
+  - name: info
+    description: Informational APIs
+  - name: core
+    description: Core APIs
+  - name: crypto
+    description: Cryptographic APIs
+  - name: keys
+    description: Key Management APIs
+  - name: objects
+    description: Object Managment APIs
+
+paths:
+  # / and ~ are special characters in JSON Pointers, and need to be escaped when
+  #  used literally:
+  # ~ is escaped with ~0, / with ~1.
+
+  # PKCS11 Paths
+  /version:
+    $ref: ./v1.0/info/version.oas3.yaml#/paths/~1version
+  
+  # Core Paths
+  /pkcs11/c_initialize:
+    $ref: ./v1.0/core/initialize.oas3.yaml#/paths/~1initialize
+
+  
+
+servers:
+  - url: /

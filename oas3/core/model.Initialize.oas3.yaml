@@ -1,0 +1,13 @@
+openapi: 3.0.0
+info:
+    title: Initialize Model
+    version: 1.0.0
+paths: {}
+components:
+    schemas:
+        InitializationOptions:
+            properties:
+                flags:
+                    type: string
+                libraryParameters:
+                    type: string

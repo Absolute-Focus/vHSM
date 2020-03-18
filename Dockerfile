@@ -32,10 +32,6 @@ RUN apk --update add opensc
 # Node StuffRUN add 
 COPY package.json .
 COPY package-lock.json .
-COPY tsconfig.json .
-RUN npm install -g typescript
 RUN npm install
-COPY src .
-RUN tsc
 
 CMD ["npm", "run", "start-server"]
